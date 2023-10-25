@@ -85,11 +85,45 @@
 
 ## Item 14
 ## Item 15
-### Use `constexpr` whenever possible
+### Use `constexpr` whenever possible (DONE)
 - Conceptually, expressions marked as `constexpr` are values that are constant and are known at compilation time (to be more precise, their values are known at *translation time*). 
 - These objects can be places in read-only memory. Can also be used in places where only compile-time knowable values are accepted such as array size specifier, integral template arguments, alignment specifiers etc.
-- `constexpr` functions produce compile-time knowable return values if called with `constexpr` parameters. Else, the function's return value may not be known at compile time.
-- 
+- `constexpr` functions produce compile-time knowable return values if called with `constexpr` parameters. Else, the function's return value may not be known at compile time. In C++14, such functions are limited to taking and returning *literal types* i.e., built-in types (including `void`) and UDT's that have `constexpr` constructor and member functions.
+- Use `constexpr` functions and obbjects wherever possible since those can be employed in a wider range of contexts than otherwise.
+- `constexpr` is a part of an object's or function's interface. If a function is later modified such that its return value cannot be knowable at compile time, that could break a lot of client code.
+- Example code:
+```c++
+class Point {
+public:
+  constexpr Point(double xVal = 0, double yVal = 0) noexcept : x(xVal), y(yVal) {}
+
+  constexpr double xValue() const noexcept { return x; }
+  constexpr double yValue() const noexcept { return y; }
+
+  constexpr void setX(double newX) noexcept { x = newX; }
+  constexpr void setY(double newY) noexcept { y = newY; }
+}
+
+constexpr Point midpoint(const Point& p1, const Point& p2) noexcept {
+  return { (p1.xValue() + p2.xValue()) / 2, (p1.yValue() + p2.yValue()) / 2 };
+}
+
+constexpr Point reflection(const Point& p) noexcept {
+  Point result;
+  result.setX(-p.xValue());
+  result.setY(-p.yValue());
+  return result;
+}
+
+int main() {
+  constexpr Point p1(9.4, 27.7);
+  constexpr Point p2(28.8, 5.3);
+  constexpr auto mid = midpoint(p1, p2);
+  constexpr auto reflectedMid = reflection(mid);
+
+  return 0;
+}
+``````
 
 ## Item 16
 
