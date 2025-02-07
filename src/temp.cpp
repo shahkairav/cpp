@@ -1,17 +1,37 @@
 #include <iostream>
-using namespace std;
+#include <vector>
+#include <utility>
 
-void foo(int x) {
-  cout << x << endl;
-}
+class A {
+private:
+    int a = 2;
 
-void foo(double x) {
-  cout << x << endl;
-}
+protected:
+    int b = 3;
+
+public:
+    int c = 4;
+
+    void foo(A& other) {
+        other.a = 5;
+    }
+
+    void print() {
+        std::cout << this->a << std::endl;
+    }
+};
+
+class B : public A {
+    void foo() {
+
+    }
+};
 
 int main() {
-  foo(3);
-  foo(3.14);
+    A a;
+    A b;
+    a.foo(b);
+    b.print();
 
-  return 0;
+    return 0;
 }

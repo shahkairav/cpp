@@ -1,12 +1,12 @@
 #include <iostream>
 #include <type_traits>
 
-void algorithm_signed  (int i)      { 
+void algorithm_signed(int i) {
     std::cout << "signed\n";
- } 
-void algorithm_unsigned(unsigned u) { 
+ }
+void algorithm_unsigned(unsigned u) {
     std::cout << "unsigned\n";
-} 
+}
 
 
 template <typename T>

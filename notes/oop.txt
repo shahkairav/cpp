@@ -1,4 +1,4 @@
-- Essence: 
+- Essence:
   - Stick to what you do. Every class takes care of its own business.
   - A class should only have a single responsibility. Avoid swiss knives.
 
@@ -25,15 +25,15 @@
 - Constructors:
   - no constructors at all ==> empty constructor by default; calls empty constructors of the base class and the members.
   - no empty constructor ==> must pass parameters
-  - Since C++11, can call another constructor; called CTOR DELEGATION
-  - Use default arguments
+  - Since C++11, can call another constructor; called CONSTRUCTOR DELEGATION
+  - Can use default arguments
   - Ctor initialization list: used for initialization of members and base classes.
     - efficiency
     - correctness
     - must use if:
-      a) contained object with no deefault ctor and no initialization on declaration
-      b) contained const data member
-      c) contained reference date member
+      a) contains object with no default ctor and no initialization on declaration
+      b) contains const data member
+      c) contains reference date member
       d) base class with no default ctor
     - members are initialized in the order of declaration in the class.
 
@@ -45,7 +45,7 @@
   - Default copy ctor does a memberwise copy
   - Used when an object is passed by value. Except:
     - copy elision:
-    - return value optimisation: 
+    - return value optimisation:
 
 - Copy assignment operator:
   - Syntax: A& A::operator=(const A& a);
@@ -53,7 +53,7 @@
 - Implicit casting works only for constant reference or for byval but not for byref.
   - This behaviour can be prevented by adding the explicit keyword to the constructor.
   - NOTE: It's okay to allow implicit construction if the arguments passed provide full state of the object.
-    - For example: string creation using a const char* is fine. However, implicitly creating a vector from an int by calling the Vector(int size) constructor is not something intended and should be used with the explicit keyword. 
+    - For example: string creation using a const char* is fine. However, implicitly creating a vector from an int by calling the Vector(int size) constructor is not something intended and should be used with the explicit keyword.
 
 - Mutable keyword is used to mark member variables that can be changed even in const functions.
   - Members that are not part of the state of the object can be marked mutable.
@@ -70,7 +70,7 @@
   - If you implement the Rule of Three, ask back for defaults for the move constructor and move assignment operator.
 
 --> Inheritance:
-- 
+-
 
 - Copy and Swap Idiom:
   - not very encouraged.

@@ -2,7 +2,7 @@
 
 - If a const object is tried to be moved, then the copy constructor is used instead.
 
-- The compiler provides default move constructor and move assignment operator unless there is no user declared copy constructor, copy assignment operator or destructor. If any of these is provided, the default move semantics are not supplied and instead fallback on copy semantics.
+- The compiler provides default move constructor and move assignment operator unless there is an user declared copy constructor, copy assignment operator, or destructor. If any of these is provided, the default move semantics are not supplied and instead fallback on copy semantics.
 
 - Declared virtual destructors also disable automatic move semantics.
 
@@ -11,7 +11,7 @@
 - Move constructor syntax: ClassName(ClassName&& obj) noexcept
   - Move constructors should ideally be marked noexcept.
 
-- Perfect forwarding: 
+- Perfect forwarding:
   - foo(const C&) binds with all values.
     foo(C&) binds with non-const lvalues.
     foo(C&&) binds with rvalues.

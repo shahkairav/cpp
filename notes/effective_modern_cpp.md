@@ -18,7 +18,7 @@
   - Then pattern match `expr`'s type against `ParamType` to determine `T`.
 
 - Case 2: `ParamType` is a universal reference.
-  - 
+  -
 
 ## Item 2
 ### Understand `auto` type deduction
@@ -35,7 +35,7 @@
   }
   ```
   The above exmple uses C++11's *trailing return type* syntax that is used to define function's return type using its parameters. The `auto` keyword here has nothing to do with type deduction and just indicates the aforementioned.
-  
+
   In C++14, return types can be deduces even for multiple return functions as long as each return expressions deduces to the same type. In that case, `auto` does indicate type deduction for the return value.
   ```c++
   template<typename Container, typename Index>
@@ -76,30 +76,30 @@
 
 ### Distinguish between `()` and `{}` when creating objects
 
-- 
+-
 
 ## Item 8
 ### Prefer `nullptr` to `0` and `NULL`:
 - Neither `0` not `NULL` has a pointer type. Passing these two might lead to calling a different overloaded function unintentionally.
 - Notwithstanding this item, overloading functions with integral and pointer arguments should be avoided, since some developers will continue to use the above two identifiers.
 - `nullptr`'s type is `std::nullptr_t` and can be thought of as a pointer of all types.
-- 
+-
 
 ## Item 9
 ### Prefer `alias` declarations to `typedef`s
-- 
+-
 
 ## Item 10
 ### Prefer scoped `enum`s to unscoped `enum`s
-- 
+-
 
 ## Item 11
 ### Prefer deleted functions to private undefined ones
-- 
+-
 
 ## Item 12
 ### Declare overriding functions `override`
-- 
+-
 
 ## Item 13
 
@@ -109,7 +109,7 @@
 
 ### Use `constexpr` whenever possible (DONE)
 
-- Conceptually, expressions marked as `constexpr` are values that are constant and are known at compilation time (to be more precise, their values are known at *translation time*). 
+- Conceptually, expressions marked as `constexpr` are values that are constant and are known at compilation time (to be more precise, their values are known at *translation time*).
 
 - These objects can be places in read-only memory. Can also be used in places where only compile-time knowable values are accepted such as array size specifier, integral template arguments, alignment specifiers etc.
 
@@ -165,7 +165,7 @@
   2. does not reveal ownership i.e., whether it's responsible for destroying the object.
   3. if to destroy, does not indicate whether to use `delete` or `delete[]` or a special destruction function.
   4. difficult to ensure that destruction of the object occurs *exactly once*.
-  5. no way to handle dangling pointers problem. 
+  5. no way to handle dangling pointers problem.
 
 - `std::auto_ptr` is a vestigial remnant of C++98 and has since been deprecated.
 
@@ -195,7 +195,7 @@
   }
 
   template<typename... Ts>
-  std::unique_ptr<Widget, decltype(customDeleter)> w(nullptr, customDeleter); 
+  std::unique_ptr<Widget, decltype(customDeleter)> w(nullptr, customDeleter);
   ```
 
 - `std::unique_ptr`'s can be easily converted into a `std::shared_ptr`:
@@ -224,12 +224,12 @@
 
   std::unique_ptr<Widget> ptr1 = std::make_unique<Widget>();
   std::shared_ptr<Widget> ptr2 = std::make_shared<Widget>(); // prefered approach
-  std::shared_ptr<Widget> ptr3(new Widget()); // do NOT use! 
+  std::shared_ptr<Widget> ptr3(new Widget()); // do NOT use!
   ```
 
 ## Item 22
 ### When using the *Pimpl idiom*, define special member function in the implementation file.
-- 
+-
 
 # [5] Rvalue References, Move Semantics, and Perfect Forwarding
 
@@ -256,7 +256,7 @@
   class Widget {
   public:
     explicit Widget(const std::string text): value(std::move(text)) {}
-  
+
   private:
     std::string value;
   };
@@ -283,9 +283,9 @@
   `std::forward` is able to check the necessary conditions using the deduced template type `T`.
 
 ## Item 24
-## Item 25 
+## Item 25
 ### Use `std::move` on rvalue references, `std::forward` on universal references:
-- 
+-
 
 ## Item 26
 ## Item 27
