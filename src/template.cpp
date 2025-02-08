@@ -2,12 +2,12 @@
 #include <string>
 #include <iostream>
 
-template<typename C, typename V> 
+template<typename C, typename V>
 std::vector<typename C::iterator> find_all(C& c, V v) {
     std::vector<typename C::iterator> res;
     for (auto p = c.begin(); p!=c.end(); ++p)
         if (*p == v) res.push_back(p);
-    return res; 
+    return res;
 }
 
 int main() {

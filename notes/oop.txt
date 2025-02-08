@@ -71,8 +71,3 @@
 
 --> Inheritance:
 -
-
-- Copy and Swap Idiom:
-  - not very encouraged.
-
-- PImpl Idiom:

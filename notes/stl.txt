@@ -43,7 +43,12 @@
 
   - sort()
   - lower_bound()
-  - remove_copy_if
+  - remove_copy_if()
+  - find_if()
+  - max_element()
+  - copy_if(input1, input2, output, pred)
+  - transform()
+  - unique_copy()
 
 - Some sequences can be traversed only once and support only single-pass iteration: input/output iterators.
 
@@ -72,7 +77,7 @@
   - end()
   - cbegin()
   - cend()
- 
+
 - Bidirectional containers provide these additional aliases and functions:
   - reverse_iterator
   - const_reverse_iterator

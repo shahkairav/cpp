@@ -5,7 +5,7 @@
 - Provide all out of a set of related operations.
 
 - Member vs Non-member:
-    - The binary operators = (assignment), [] (array subscription), -> (member access), as well as the n-ary () (function call) operator, must always be implemented as member functions, because the syntax of the language requires them to.
+    - The binary operators `=` (assignment), `[]` (array subscription), `->` (member access), as well as the n-ary `()` (function call) operator, must always be implemented as member functions, because the syntax of the language requires them to.
 
     - If it is a unary operator, implement as a member function.
 
@@ -31,8 +31,8 @@
     ```c++
     X& X::operator=(const X& rhs)
     {
-    swap(rhs);
-    return *this;
+        swap(rhs);
+        return *this;
     }
     ```
 
@@ -40,16 +40,16 @@
     ```c++
     std::ostream& operator<<(std::ostream& os, const T& obj)
     {
-    // Write obj to stream
-    return os;
+        // Write obj to stream
+        return os;
     }
 
     std::istream& operator>>(std::istream& is, T& obj)
     {
-    // Read obj from stream
-    if( /* no valid object of T found in stream */ )
-        is.setstate(std::ios::failbit);
-    return is;
+        // Read obj from stream
+        if( /* no valid object of T found in stream */ )
+            is.setstate(std::ios::failbit);
+        return is;
     }
     ```
 
@@ -70,8 +70,8 @@
     #include <compare>
 
     struct X {
-    // defines ==, !=, <, >, <=, >=, <=>
-    friend auto operator<=>(const X&, const X&) = default;
+        // defines ==, !=, <, >, <=, >=, <=>
+        friend auto operator<=>(const X&, const X&) = default;
     };
     ```
 
@@ -82,17 +82,18 @@
 
     ```c++
     struct X {
-    X& operator++()
-    {
-        // Do actual increment
-        return *this;
-    }
-    X operator++(int)
-    {
-        X tmp(*this);
-        operator++();
-        return tmp;
-    }
+        X& operator++()
+        {
+            // Do actual increment
+            return *this;
+        }
+
+        X operator++(int)
+        {
+            X tmp(*this);
+            operator++();
+            return tmp;
+        }
     };
     ```
 
@@ -101,18 +102,18 @@
 
     ```c++
     struct X {
-    X& operator+=(const X& rhs)
-    {
-        // actual addition of rhs to *this
-        return *this;
-    }
+        X& operator+=(const X& rhs)
+        {
+            // actual addition of rhs to *this
+            return *this;
+        }
     };
 
     inline X operator+(const X& lhs, const X& rhs)
     {
-    X result = lhs;
-    result += rhs;
-    return result;
+        X result = lhs;
+        result += rhs;
+        return result;
     }
     ```
 
@@ -120,13 +121,23 @@
 
 - Subscript operator:
     ```c++
-        struct X {
-            value_type& operator[](index_type idx);
-    const value_type& operator[](index_type idx) const;
-    // ...
+    struct X {
+        value_type& operator[](index_type idx);
+        const value_type& operator[](index_type idx) const;
+        // ...
     };
     ```
 
 - Operators for Pointer-like types:
-    -
+    ```c++
+    struct my_ptr {
+        value_type& operator*();
+        const value_type& operator*() const;
+        value_type* operator->();
+        const value_type* operator->() const;
+    };
+    ```
+
+    - The member access operator `->` is a bit weird. It implementes _drill-down behaviour_ i.e., it recursively calls the operator till it receives an object of pointer type. Note that the overload syntax does not take an argument.
+
 
