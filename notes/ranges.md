@@ -20,6 +20,8 @@
     std::functional<bool(int, int)> // functor or lambda function that takes two ints and returns a boolean
     ```
 
+### Ranges:
+
 - A _range_ is anything with a begin() and an end().
 
 - Any algorithm that takes a pair of iterators specifying a _range_ can instead simply take an object that implements the `begin()` and `end()` methods.
@@ -28,5 +30,9 @@ std::ranges::find(v, 5);
 ```
 
 - Range algorithms are **constrained** i.e., they make use of _concepts_.
+
+### Views:
+
+- A way to compose algorithms. It is a range that lazily adapts another range.
 
 -

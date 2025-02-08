@@ -4,7 +4,7 @@
   3. Adaptors
   4. Iterators
 
-- Goal of STL: #Algo * #Representations * #Types ==> #Algo + #Representations + #Types
+- Goal of STL: _#Algo * #Representations * #Types ==> #Algo + #Representations + #Types_
 
 - Containers store collections of elements.
   Algorithms perform operations upon collections of elements.
@@ -13,11 +13,11 @@
 
 - Most algorithms are template functions parametrized by generic types of iterators.
 
-- Sequence containers: vector, deque, list, array, forward_list
+- Sequence containers: `vector`, `deque`, `list`, `array`, `forward_list`
 
-- Associative containers: map, set, multimap, multiset (and their unordered analogues)
+- Associative containers: `map`, `set`, `multimap`, `multiset` (and their unordered analogues)
 
-- Container adaptors: queue, stack, priority_queue
+- Container adaptors: `queue`, `stack`, `priority_queue`
 
 - An iterator's interface specifies:
   - the complexity of observing and traversing a collection's elements
@@ -25,15 +25,15 @@
   - wheter an element can be read from or written to
 
 - Five iterator categories:
-  - output
-  - input
-  - forward
-  - bidirectional
-  - random access
+  - `output`
+  - `input`
+  - `forward`
+  - `bidirectional`
+  - `random access`
 
-  random access -> bidirectional -> forward --> input
+  `random access` -> `bidirectional` -> `forward` --> `input`
                                             \
-                                              --> output
+                                              --> `output`
 
   - The above is not public heritance. It's a hierarchy of requirements.
 
@@ -41,14 +41,14 @@
   - Processes ranges of elements of a collection. Requires at least one explicitly specified iterator pair.
   - Removing algorithms work by rearranging elements and setting the end iterator appoprately.
 
-  - sort()
-  - lower_bound()
-  - remove_copy_if()
-  - find_if()
-  - max_element()
-  - copy_if(input1, input2, output, pred)
-  - transform()
-  - unique_copy()
+  - `sort()`
+  - `lower_bound()`
+  - `remove_copy_if()`
+  - `find_if()`
+  - `max_element()`
+  - `copy_if(input1, input2, output, pred)`
+  - `transform()`
+  - `unique_copy()`
 
 - Some sequences can be traversed only once and support only single-pass iteration: input/output iterators.
 
@@ -89,4 +89,3 @@
 - vector<bool> is not a standard container for space optimisation reasons. Hence, a vector provides contiguous storage for all elements except bool. vector<bool> is used to deal with after the auto keyword was introduced in C++11.
 
 - Stack, Queue, and Priority_Queue are by default implemented over deque.
-
