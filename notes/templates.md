@@ -2,6 +2,9 @@
 
 - Prefer to use the `typename` keyword for template declarations. The `class` keyword is a remnant from C++'s history and is maintained for legacy purposes.
 
+- When using templates, the header files must include the corresponding `.cpp` files at the end.
+    - TODO: Why?
+
 ### The Very Basics
 
 - Template functions can have implicit instantiations. The type deduction is similar to `auto`.

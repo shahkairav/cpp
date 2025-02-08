@@ -15,8 +15,9 @@
 
 - Object size:
   - size of all members including the parent classes.
-  - may have a pointer to vtable; __vptr
+  - may have a pointer to vtable; `__vptr`
   - may include padding.
+  - empty classes do not have zero size to ensure that two objects do not have the same address. However, an empty base class need not be represented by another byte; this is called _empty base class optimization_.
 
 - Methods that are defined in the class definition itself (probably in a header file) are by default inlined by the compiler.
 
@@ -55,6 +56,22 @@
   - NOTE: It's okay to allow implicit construction if the arguments passed provide full state of the object.
     - For example: string creation using a const char* is fine. However, implicitly creating a vector from an int by calling the Vector(int size) constructor is not something intended and should be used with the explicit keyword.
 
+- Member functions that do not modify the object's members should be marked const so as to be compatible with `const` objects. However, they should also have `non-const` analogue implementations if mutable behaviour is desired for non-const objects.
+```c++
+template<typename T>
+class Vector {
+    public:
+        const T& at(size_t index) const;
+        T& at(size_t index);
+}
+
+// Implementation
+template<typename T>
+const T& Vector<T>::at(size_t index) const {
+    return std::const_cast<Vector<T>&>(*this).at(index);
+}
+```
+
 - Mutable keyword is used to mark member variables that can be changed even in const functions.
   - Members that are not part of the state of the object can be marked mutable.
     For example: For a vector class, only the size and the array constitute the state of the object, and members such as sum can be marked mutable.
@@ -71,3 +88,44 @@
 
 --> Inheritance:
 -
+
+- While implementing interfaces, implement the class as a `pure interface` to prevent spurious recompilation of user codes and need to include several header files. If there truly is some data that is common to all classes that derive from this interface, then store it in a class of its own and have the derived classes inherit from both.
+```c++
+class Shape {
+    public:		// interface to users of Shapes
+        virtual void draw() const = 0;
+        virtual void rotate(int degrees) = 0;
+        virtual Point center() const = 0;
+        // ...
+
+        // no data
+};
+
+struct Common {
+    Color col;
+    // ...åå
+};
+
+class Circle : public Shape, protected Common {
+    public:
+        void draw() const;
+        void rotate(int) { }
+        Point center() const { return cent; }
+        // ...
+
+    protected:
+        Point cent;
+        int radius;
+};
+
+class Triangle : public Shape, protected Common {
+    public:
+        void draw() const;
+        void rotate(int);
+        Point center() const;
+        // ...
+
+    protected:
+        Point a, b, c;
+};
+```
