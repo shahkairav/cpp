@@ -1,2 +1,5 @@
 # Ignore VS Code settings
 .vscode
+
+# Ignore Mac system metafiles
+**/.DS_Store
