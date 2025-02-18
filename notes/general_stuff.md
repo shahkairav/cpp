@@ -39,5 +39,23 @@
 
 - Other type of iterator is `output` iterator. This iterator allows writing to the element.
 
--
+### Static keyword:
 
+- The `static` keyword used outside of a class / struct means that the variable / function has internal linkage i.e., it is visible only within that translation unit.
+    - In some sense, `extern` does the opposite in that it just serves as the declaration of a variable and looks for the actual definition in other translation units.
+
+- Inside of a class / struct, it means there will be only one shared instance of that variable across all instances of the class.
+    - Static members cannot be defined inside of a class and need to be initialized outside of the class. This is because header files can be included in multiple translation units and that would lead to duplicate definitions if in-class definitions were allowed.
+
+- Static methods cannot access non-static members for obvious reasons.
+
+- Local Scope static:
+    - Ensures that the lifetime of the variable is extended till the process is terminated.
+    - However, the scope is still limited to the original scope.
+    - Example:
+    ```c++
+    void foo() {
+        static int i = 0;
+        std::cout << i++ << std::endl;
+    }
+    ```

@@ -1,3 +1,9 @@
+- Before discussing concepts, we take a small detour and discuss type traits, since they are closely related concepts (haha).
+
+## Type Traits:
+
+-
+
 ## Concepts:
 
 - Used to enhance templates with semantic logic and enforce such semantic checks at compile time. Introduced in **C++20**.
